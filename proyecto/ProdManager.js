@@ -1,6 +1,6 @@
 const fs = require('fs');
 const dirName = "./prod";
-const fileName = dirName + "prod.js";
+const fileName = dirName + "prod.json";
 
 
 class Products {

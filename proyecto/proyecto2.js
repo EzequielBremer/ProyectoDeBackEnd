@@ -8,7 +8,7 @@ console.log(prodManager.getProducts());
    prodManager.addProd("Bunny Girl Senpai", "Tomo 1", 1500, "sin img", 2, 15);
    prodManager.addProd("Wotakoi", "Tomo 7", 1300, "sin img", 5, 35);
 console.log(prodManager.getProducts());
-//prodManager.getProductById(3);
-//prodManager.deleteProduct(2);
-//prodManager.updateProduct(1, {precio: 4000});
+/*prodManager.getProductById(3);
+prodManager.deleteProduct(2);
+prodManager.updateProduct(1, {precio: 4000})*/
 console.log(prodManager.getProducts());

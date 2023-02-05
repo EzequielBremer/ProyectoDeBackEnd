@@ -11,7 +11,7 @@ const express = require('express');
 
 const app = express() ;
 
-const prod = require("../files/Product.json");
+const prod = require("../../files/prod.json");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
  
@@ -22,7 +22,7 @@ app.get("/productos", (request, response) => {
 app.get("/productos/:code", (request, response) => {
     const prod = prod.find(prod => prod.code === request.params.code);
     if(prod){
-        response.send(prod);
+        response.send(prod); 
     }
     response.send({message: "code no encontrado!"})
 });
