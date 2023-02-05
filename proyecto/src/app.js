@@ -9,11 +9,11 @@ let verProd = async () => {
 }
 const express = require('express');
 
-const app = express() ;
+const app = express() ; 
 
-const prod = require("../../files/prod.json");
+const prod = require("../files/Products.json");
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));  
  
 app.get("/productos", (request, response) => {
     response.end(JSON.stringify(prod));

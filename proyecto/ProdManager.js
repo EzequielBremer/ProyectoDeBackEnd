@@ -1,6 +1,6 @@
 const fs = require('fs');
-const dirName = "./prod";
-const fileName = dirName + "prod.json";
+const dirName = "../files/Products.json";
+const fileName = dirName + "Products.json";
 
 
 class Products {
@@ -54,7 +54,7 @@ class ProductManager {
 		return this.products;
 	}
 
-	addProduct = async (title, description, price, thumbnail, stock, code, id) => {
+	addProd = async (title, description, price, thumbnail, stock, code, id) => {
 		let newProduct = new Products (title, description, price, thumbnail, stock, code, id);
 		console.log(newProduct);
 
