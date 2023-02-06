@@ -1,6 +1,6 @@
 const fs = require('fs');
-const dirName = "../files/Products.json";
-const fileName = dirName + "Products.json";
+const dirName = "./prod";
+const fileName = dirName + "prod.js";
 
 
 class Products {
@@ -35,7 +35,7 @@ class ProductManager {
 
 	constructor(){
 		this.products = new Array();
-		this.#productDirPath = "files";
+		this.#productDirPath = "./proyecto/files";
         this.#productFilePath = this.#productDirPath+"/Products.json";
 		this.#fileSystem = require("fs");
 	}
@@ -54,7 +54,7 @@ class ProductManager {
 		return this.products;
 	}
 
-	addProd = async (title, description, price, thumbnail, stock, code, id) => {
+	addProduct = async (title, description, price, thumbnail, stock, code, id) => {
 		let newProduct = new Products (title, description, price, thumbnail, stock, code, id);
 		console.log(newProduct);
 
@@ -63,16 +63,16 @@ class ProductManager {
             await this.consultProduct()
 
 			if(this.products.some(prod => prod.code === newProduct.code)){
-				console.error("El código ya existe")
+				console.error("Este codigo ya se creo")
 			}else{
 				this.products.push(newProduct);
-				console.log("Lista actualizada de productos: ");
+				console.log("Se actualizo la lista de productos: ");
 				console.log(this.products)
 				await this.#fileSystem.promises.writeFile(this.#productFilePath, JSON.stringify(this.products));
 			}	
 		}catch(error) {
-			console.error(`Error al agregar producto: ${JSON.stringify(newProduct)}, detalle del error: ${error}`);
-			throw Error(`Error al agregar producto: ${JSON.stringify(newProduct)}, detalle del error: ${error}`);
+			console.error(`Error al agregar el producto: ${JSON.stringify(newProduct)}, Error: ${error}`);
+			throw Error(`Error al agregar el producto: ${JSON.stringify(newProduct)}, Error: ${error}`);
 		}
     }
 
@@ -82,18 +82,17 @@ class ProductManager {
 
             let productFile = await this.#fileSystem.promises.readFile(this.#productFilePath, "utf-8");
             
-            console.info("Archivo JSON obtenido desde archivo: ");
+            console.info("Archivo JSON obtenido desde el archivo: ");
             console.log(productFile);
 
             this.products = JSON.parse(productFile)
     
-            console.log("Productos encontrados: ");
+            console.log("Productos: ");
             console.log(this.products);
             return this.products;
 
         } catch (error){
-            console.error("Error al consultar los productos");
-            //throw Error(`Error al consultar los productos ${error}`);
+            console.error("Error al consultar productos");
         }
 
     }
@@ -105,14 +104,14 @@ class ProductManager {
 
             let productId = this.products.find((prod) => prod.id === id)
             if(productId){
-                console.log("El producto está disponible ")
+                console.log("El producto esta disponible")
                 console.log(productId)
             }else{
-                console.log("El producto no se encuentra disponible")
+                console.log("El producto no esta disponible")
             }
         }catch (error){
-            console.log("Error al consultar ID")
-            throw Error (`Error al consultar ID, el detalle del error ${error}`)
+            console.log("Error al consultar el ID")
+            throw Error (`Error al consultar el ID, Error:${error}`)
         }
 	}
 
@@ -125,13 +124,13 @@ class ProductManager {
             if (deletProd){
                 const index = this.products.indexOf(deletProd);
                 this.products.splice(index, 1);
-                console.log("se eliminó el producto")
+                console.log("El producto se elimino")
                 console.log(this.products)
                 await this.#fileSystem.promises.writeFile(this.#productFilePath, JSON.stringify(this.products));
             }
         }catch{
-            console.log("Error al eliminar el producto")
-            throw Error (`Error al eliminar el producto, el detalle del error ${error}`)
+            console.log("Error al eliminar producto")
+            throw Error (`Error al eliminar el producto, Error:${error}`)
         }
     }
 
@@ -153,7 +152,7 @@ class ProductManager {
         await this.prepareDirProducts();
         await this.consultProduct();
         await this.#fileSystem.promises.unlink(this.#productFilePath);
-        console.log("Archivo borrado con éxito");
+        console.log("El archivo se borro correctamente");
     }
 }
 
