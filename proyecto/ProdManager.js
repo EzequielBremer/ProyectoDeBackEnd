@@ -138,7 +138,7 @@ class ProductManager {
         await this.getProducts();
         const updateProd = this.products.map((prod) => {
             if(prod.id === id){
-                return {...prod, ...newProd};
+                return {...prod, ...newProd,id};
             }else{
                 return prod;
             }
