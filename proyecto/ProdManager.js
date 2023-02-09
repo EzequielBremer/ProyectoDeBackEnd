@@ -10,9 +10,8 @@ class Products {
         this.precio = precio;
         this.img = img;
         this.stock = stock;
-        this.code = Math.random().toString(30).substring(2);
-        this.id = Products.getId();
-
+        this.code = code
+        this.id = id
     }
 
     static getId = () => {
@@ -54,21 +53,23 @@ class ProductManager {
 		return this.products;
 	}
 
-	addProduct = async (title, description, price, thumbnail, stock, code, id) => {
-		let newProduct = new Products (title, description, price, thumbnail, stock, code, id);
+	addProduct = async (title, description, price, thumbnail, stock, code, newId ) => {
+		let newProduct = new Products (title, description, price, thumbnail, stock, code, newId );
 		console.log(newProduct);
 
 		try{
-			await this.prepareDirProducts();
+			await this.prepareDirProducts()
             await this.consultProduct()
+            const newId = products.length ? products[ products.length - 1 ].id + 1 : 0
 
 			if(this.products.some(prod => prod.code === newProduct.code)){
 				console.error("Este codigo ya se creo")
 			}else{
-				this.products.push(newProduct);
+                let newProduct = new Products (title, description, price, thumbnail, stock, code, newId );
+                this.products.push(newProduct);
 				console.log("Se actualizo la lista de productos: ");
 				console.log(this.products)
-				await this.#fileSystem.promises.writeFile(this.#productFilePath, JSON.stringify(this.products));
+                await this.#fileSystem.promises.writeFile(this.#productFilePath, JSON.stringify(this.products));
 			}	
 		}catch(error) {
 			console.error(`Error al agregar el producto: ${JSON.stringify(newProduct)}, Error: ${error}`);
