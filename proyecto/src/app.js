@@ -17,11 +17,7 @@ app.get("/productos", async (request, response) => {
     if(!limit){
         return response.send(JSON.stringify(prod));
     }
-    if (limit == "5"){
-        let prodQuery = prod.slice(0,5);
-        console.log({prod:prodQuery});
-        response.send({prod:prodQuery});
-    }
+    if (limit)response.send(JSON.parse(prod).filter((product,index)=> index < limit)); 
 });
 
 app.get("/productos/:id", (request, response) => {
@@ -30,7 +26,6 @@ app.get("/productos/:id", (request, response) => {
     if (!product) return response.send("El producto no se encontro");
 
     response.send(product);
-
 });
 
 
